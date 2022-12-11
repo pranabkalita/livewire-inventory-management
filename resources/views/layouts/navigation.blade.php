@@ -19,6 +19,10 @@
                     <x-nav-link :href="route('suppliers.index')" :active="request()->routeIs('suppliers.index')">
                         Suppliers
                     </x-nav-link>
+
+                    <x-nav-link :href="route('units.index')" :active="request()->routeIs('units.index')">
+                        Units
+                    </x-nav-link>
                 </div>
             </div>
 
