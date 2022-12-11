@@ -52,8 +52,10 @@
                         <select
                             class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             name="status" value="{{ $supplier->status }}}">
-                            <option value="{{ \App\Models\Supplier::STATUS['ACTIVE'] }}">Active</option>
-                            <option value="{{ \App\Models\Supplier::STATUS['INACTIVE'] }}">Inactive</option>
+                            <option value="{{ \App\Models\Supplier::STATUS['ACTIVE'] }}"
+                                @if ($supplier->status === \App\Models\Supplier::STATUS['ACTIVE']) selected @endif>Active</option>
+                            <option value="{{ \App\Models\Supplier::STATUS['INACTIVE'] }}"
+                                @if ($supplier->status === \App\Models\Supplier::STATUS['INACTIVE']) selected @endif>Inactive</option>
                         </select>
                         <x-input-error :messages="$errors->get('address')" class="mt-2" />
                     </div>

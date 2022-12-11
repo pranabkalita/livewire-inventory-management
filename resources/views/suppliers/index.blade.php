@@ -10,54 +10,48 @@
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
 
                 <div class="flex justify-end">
-                    <a href="{{ route('suppliers.create') }}"
-                        class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">Create
-                        New</a>
+                    <x-link-button href="{{ route('suppliers.create') }}" title="Create New" />
                 </div>
 
                 <!-- component (https://tailwindcomponents.com/component/projects-table) -->
                 <div class="bg-white shadow-md rounded my-6">
-                    <table class="min-w-max w-full table-auto">
-                        <thead>
-                            <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                                <th class="py-3 px-6 text-left">Id</th>
-                                <th class="py-3 px-6 text-left">Name</th>
-                                <th class="py-3 px-6 text-center">Email</th>
-                                <th class="py-3 px-6 text-center">Phone</th>
-                                <th class="py-3 px-6 text-center">Status</th>
-                                <th class="py-3 px-6 text-center">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-gray-600 text-sm font-light">
+                    <x-table>
+                        <x-table.thead>
+                            <x-table.tr>
+                                <x-table.th class="text-left">Id</x-table.th>
+                                <x-table.th class="text-left">Name</x-table.th>
+                                <x-table.th class="text-center">Email</x-table.th>
+                                <x-table.th class="text-center">Phone</x-table.th>
+                                <x-table.th class="text-center">Status</x-table.th>
+                                <x-table.th class="text-center">Actions</x-table.th>
+                            </x-table.tr>
+                        </x-table.thead>
+                        <x-table.tbody>
                             @foreach ($suppliers as $supplier)
-                                <tr class="border-b border-gray-200 hover:bg-gray-100">
-                                    <td class="py-3 px-6 text-left whitespace-nowrap">
+                                <x-table.tr in-body="true" class="border-b border-gray-200 hover:bg-gray-100">
+                                    <x-table.td class="text-left whitespace-nowrap">
                                         {{ $supplier->id }}
-                                    </td>
-                                    <td class="py-3 px-6 text-left">
+                                    </x-table.td>
+                                    <x-table.td class="text-left">
                                         {{ $supplier->name }}
-                                    </td>
-                                    <td class="py-3 px-6 text-center">
+                                    </x-table.td>
+                                    <x-table.td class="text-center">
                                         {{ $supplier->email }}
-                                    </td>
-                                    <td class="py-3 px-6 text-center">
+                                    </x-table.td>
+                                    <x-table.td class="text-center">
                                         {{ $supplier->phone_number }}
-                                    </td>
-                                    <td class="py-3 px-6 text-center">
+                                    </x-table.td>
+                                    <x-table.td class="text-center">
                                         @if ($supplier->status === \App\Models\Supplier::STATUS['ACTIVE'])
-                                            <span
-                                                class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">Active</span>
+                                            <x-status-badge title="Active" color="green" />
                                         @elseif($supplier->status === \App\Models\Supplier::STATUS['INACTIVE'])
-                                            <span
-                                                class="bg-red-200 text-red-600 py-1 px-3 rounded-full text-xs">Inactive</span>
+                                            <x-status-badge title="Inactive" color="red" />
                                         @endif
-                                    </td>
-                                    <td class="py-3 px-6 text-center">
+                                    </x-table.td>
+                                    <x-table.td class="text-center">
                                         <div class="flex item-center justify-center">
-                                            <a href="{{ route('suppliers.edit', $supplier->id) }}"
-                                                class="text-indigo-500 hover:underline">
-                                                Edit
-                                            </a>
+                                            <x-link href="{{ route('suppliers.edit', $supplier->id) }}" title="Edit"
+                                                color="indigo" />
 
                                             <form action="{{ route('suppliers.destroy', $supplier->id) }}"
                                                 method="POST">
@@ -67,11 +61,11 @@
                                                     onclick='return confirm("Are you sure ?")'>Delete</button>
                                             </form>
                                         </div>
-                                    </td>
-                                </tr>
+                                    </x-table.td>
+                                </x-table.tr>
                             @endforeach
-                        </tbody>
-                    </table>
+                        </x-table.tbody>
+                    </x-table>
 
                     <div class="mt-3 p-2">
                         {{ $suppliers->links() }}
