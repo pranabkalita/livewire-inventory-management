@@ -42,12 +42,16 @@
                             Suppliers
                         </x-dropdown-link>
 
+                        <x-dropdown-link :href="route('categories.index')">
+                            Categories
+                        </x-dropdown-link>
+
                         <x-dropdown-link :href="route('units.index')">
                             Units
                         </x-dropdown-link>
 
-                        <x-dropdown-link :href="route('categories.index')">
-                            Categories
+                        <x-dropdown-link :href="route('products.index')">
+                            Products
                         </x-dropdown-link>
                     </x-slot>
                 </x-dropdown>

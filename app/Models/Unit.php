@@ -18,4 +18,14 @@ class Unit extends Model
         'name',
         'status'
     ];
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    public function scopeActiveStatus($query)
+    {
+        return $query->where('status', self::STATUS['ACTIVE']);
+    }
 }

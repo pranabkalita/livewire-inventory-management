@@ -26,14 +26,12 @@
 
                     <div>
                         <x-input-label for="status" :value="__('Status')" />
-                        <select
-                            class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            name="status" value="{{ $unit->status }}}">
+                        <x-input-select name="status" id="status">
                             <option value="{{ \App\Models\Unit::STATUS['ACTIVE'] }}"
                                 @if ($unit->status === \App\Models\Unit::STATUS['ACTIVE']) selected @endif>Active</option>
                             <option value="{{ \App\Models\Unit::STATUS['INACTIVE'] }}"
                                 @if ($unit->status === \App\Models\Unit::STATUS['INACTIVE']) selected @endif>Inactive</option>
-                        </select>
+                        </x-input-select>
                         <x-input-error :messages="$errors->get('status')" class="mt-2" />
                     </div>
 
