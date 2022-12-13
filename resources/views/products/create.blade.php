@@ -13,7 +13,9 @@
                     <x-link-button href="{{ route('products.index') }}" title="Back" />
                 </div>
 
-                <form method="post" action="{{ route('products.store') }}" class="mt-6 space-y-6">
+                <livewire:products.create />
+
+                {{-- <form method="post" action="{{ route('products.store') }}" class="mt-6 space-y-6">
                     @csrf
 
                     <div>
@@ -56,7 +58,7 @@
                     <div class="flex items-center gap-4">
                         <x-primary-button>{{ __('Save') }}</x-primary-button>
                     </div>
-                </form>
+                </form> --}}
             </div>
         </div>
     </div>

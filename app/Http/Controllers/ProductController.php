@@ -26,41 +26,9 @@ class ProductController extends Controller
         return view('products.create', compact('suppliers', 'categories', 'units'));
     }
 
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'name' => 'required|string|min:2|unique:products,name',
-            'supplier_id' => 'required|numeric',
-            'category_id' => 'required|numeric',
-            'unit_id' => 'required|numeric'
-        ]);
-
-        Product::create($validated);
-
-        return to_route('products.index')->with('message', 'Product created successfully !');
-    }
-
     public function edit(Product $product)
     {
-        $suppliers = Supplier::activeStatus()->get();
-        $categories = Category::activeStatus()->get();
-        $units = Unit::activeStatus()->get();
-
-        return view('products.edit', compact('product', 'suppliers', 'categories', 'units'));
-    }
-
-    public function update(Request $request, Product $product)
-    {
-        $validated = $request->validate([
-            'name' => 'required|string|min:2|unique:products,name,' . $product->id,
-            'supplier_id' => 'required|numeric',
-            'category_id' => 'required|numeric',
-            'unit_id' => 'required|numeric'
-        ]);
-
-        $product->update($validated);
-
-        return to_route('products.index')->with('message', 'Product updated successfully !');
+        return view('products.edit', compact('product'));
     }
 
     public function destroy(Product $product)

@@ -16,12 +16,23 @@ class Category extends Model
 
     protected $fillable = [
         'name',
-        'status'
+        'status',
+        'supplier_id'
     ];
+
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class);
+    }
 
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class);
     }
 
     public function scopeActiveStatus($query)

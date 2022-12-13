@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UnitController;
 use Illuminate\Support\Facades\Route;
@@ -34,7 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('/suppliers', SupplierController::class)->except('show');
     Route::resource('/categories', CategoryController::class)->except('show');
     Route::resource('/units', UnitController::class)->except('show');
-    Route::resource('/products', ProductController::class)->except('show');
+    Route::resource('/products', ProductController::class)->except(['show', 'store', 'update']);
+    Route::resource('/purchases', PurchaseController::class)->except('show');
 });
 
 require __DIR__ . '/auth.php';

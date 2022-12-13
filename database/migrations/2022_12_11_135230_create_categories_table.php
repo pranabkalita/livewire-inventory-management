@@ -16,9 +16,12 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name');
+            $table->unsignedBigInteger('supplier_id')->index();
             $table->string('status')->default(Category::STATUS['ACTIVE']);
             $table->timestamps();
+
+            $table->foreign('supplier_id')->references('id')->on('suppliers')->cascadeOnDelete();
         });
     }
 

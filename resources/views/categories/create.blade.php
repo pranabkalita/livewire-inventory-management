@@ -23,6 +23,16 @@
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
 
+                    <div>
+                        <x-input-label for="supplier_id" :value="__('Supplier')" />
+                        <x-input-select name="supplier_id" id="supplier_id">
+                            @foreach ($suppliers as $supplier)
+                                <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+                            @endforeach
+                        </x-input-select>
+                        <x-input-error :messages="$errors->get('supplier')" class="mt-2" />
+                    </div>
+
                     <div class="flex items-center gap-4">
                         <x-primary-button>{{ __('Save') }}</x-primary-button>
                     </div>

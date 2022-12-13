@@ -25,6 +25,17 @@
                     </div>
 
                     <div>
+                        <x-input-label for="supplier_id" :value="__('Supplier')" />
+                        <x-input-select name="supplier_id" id="supplier_id">
+                            @foreach ($suppliers as $supplier)
+                                <option value="{{ $supplier->id }}" @if ($supplier->id === $category->supplier_id) selected @endif>
+                                    {{ $supplier->name }}</option>
+                            @endforeach
+                        </x-input-select>
+                        <x-input-error :messages="$errors->get('supplier')" class="mt-2" />
+                    </div>
+
+                    <div>
                         <x-input-label for="status" :value="__('Status')" />
                         <x-input-select name="status" id="status">
                             <option value="{{ \App\Models\Category::STATUS['ACTIVE'] }}"

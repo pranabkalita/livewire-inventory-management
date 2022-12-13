@@ -22,9 +22,19 @@ class Supplier extends Model
         'status'
     ];
 
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
+
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class);
     }
 
     public function scopeActiveStatus($query)

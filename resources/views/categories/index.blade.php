@@ -20,6 +20,7 @@
                             <x-table.tr>
                                 <x-table.th class="text-left">Id</x-table.th>
                                 <x-table.th class="text-left">Name</x-table.th>
+                                <x-table.th class="text-left">Supplier</x-table.th>
                                 <x-table.th class="text-center">Status</x-table.th>
                                 <x-table.th class="text-center">Actions</x-table.th>
                             </x-table.tr>
@@ -30,8 +31,11 @@
                                     <x-table.td class="text-left whitespace-nowrap">
                                         {{ $category->id }}
                                     </x-table.td>
-                                    <x-table.td class="text-left">
+                                    <x-table.td class="text-left whitespace-nowrap">
                                         {{ $category->name }}
+                                    </x-table.td>
+                                    <x-table.td class="text-left">
+                                        {{ $category->supplier->name }}
                                     </x-table.td>
                                     <x-table.td class="text-center">
                                         @if ($category->status === \App\Models\Category::STATUS['ACTIVE'])

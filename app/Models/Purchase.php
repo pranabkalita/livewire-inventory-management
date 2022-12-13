@@ -5,21 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Purchase extends Model
 {
     use HasFactory;
 
     const STATUS = [
-        'ACTIVE' => 'Active',
-        'INACTIVE' => 'Inactive'
+        'APPROVED' => 'Approved',
+        'PENDING' => 'Pending'
     ];
 
     protected $fillable = [
-        'name',
-        'status',
+        'purchase_number',
+        'date',
         'supplier_id',
         'category_id',
-        'unit_id'
+        'product_id',
+        'quantity',
+        'price',
+        'amount'
     ];
 
     public function supplier()
@@ -27,23 +30,13 @@ class Product extends Model
         return $this->belongsTo(Supplier::class);
     }
 
-    public function unit()
-    {
-        return $this->belongsTo(Unit::class);
-    }
-
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function purchases()
+    public function product()
     {
-        return $this->hasMany(Purchase::class);
-    }
-
-    public function scopeActiveStatus($query)
-    {
-        return $query->where('status', self::STATUS['ACTIVE']);
+        return $this->belongsTo(Product::class);
     }
 }

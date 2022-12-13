@@ -3,26 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::orderBy('id', 'desc')->paginate(10);
+        $categories = Category::with('supplier')->orderBy('id', 'desc')->paginate(10);
 
         return view('categories.index', compact('categories'));
     }
 
     public function create()
     {
-        return view('categories.create');
+        $suppliers = Supplier::activeStatus()->orderBy('name', 'asc')->get();
+
+        return view('categories.create', compact('suppliers'));
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|unique:categories,name'
+            'name' => 'required|string',
+            'supplier_id' => 'required'
         ]);
 
         Category::create($validated);
@@ -32,14 +36,17 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
-        return view('categories.edit', compact('category'));
+        $suppliers = Supplier::activeStatus()->orderBy('name', 'asc')->get();
+
+        return view('categories.edit', compact('category', 'suppliers'));
     }
 
     public function update(Request $request, Category $category)
     {
         $validated = $request->validate([
-            'name' => 'required|string|unique:categories,name,' . $category->id,
-            'status' => 'required'
+            'name' => 'required|string',
+            'status' => 'required',
+            'supplier_id' => 'required'
         ]);
 
         $category->update($validated);
