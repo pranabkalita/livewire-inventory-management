@@ -39,6 +39,10 @@
                             <x-dropdown-link :href="route('purchases.index')">
                                 All Purchases
                             </x-dropdown-link>
+
+                            <x-dropdown-link :href="route('approve.index')">
+                                Approve Purchases
+                            </x-dropdown-link>
                         </x-slot>
                     </x-dropdown>
                 </div>

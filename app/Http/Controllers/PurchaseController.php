@@ -18,4 +18,20 @@ class PurchaseController extends Controller
     {
         return view('purchases.create');
     }
+
+    public function update(Request $request, Purchase $purchase)
+    {
+        $purchase->update([
+            'status' => Purchase::STATUS['APPROVED'],
+        ]);
+
+        return to_route('approve.index')->with('message', 'Purchase has been approved.');
+    }
+
+    public function destroy(Purchase $purchase)
+    {
+        $purchase->delete();
+
+        return to_route('purchases.index')->with('message', 'Purchase has been deleted.');
+    }
 }

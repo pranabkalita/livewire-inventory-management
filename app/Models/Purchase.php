@@ -22,7 +22,8 @@ class Purchase extends Model
         'product_id',
         'quantity',
         'price',
-        'amount'
+        'amount',
+        'status'
     ];
 
     public function supplier()
